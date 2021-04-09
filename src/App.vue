@@ -1,28 +1,46 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <router-view></router-view>
+    <tab-bar>
+      <tab-item path="/home">
+        <img src="~assets/img/icon/home.svg" alt="" />
+        <template v-slot:item-text>
+          <div>首页</div>
+        </template>
+      </tab-item>
+      <tab-item path="/category">
+        <img src="~assets/img/icon/category.svg" alt="" />
+        <template v-slot:item-text>
+          <div>分类</div>
+        </template>
+      </tab-item>
+      <tab-item path="/cart">
+        <img src="~assets/img/icon/cart.svg" alt="" />
+        <template v-slot:item-text>
+          <div>购物车</div>
+        </template>
+      </tab-item>
+      <tab-item path="/profile">
+        <img src="~assets/img/icon/profile.svg" alt="" />
+        <template v-slot:item-text>
+          <div>我的</div>
+        </template>
+      </tab-item>
+    </tab-bar>
   </div>
 </template>
-
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import TabBar from "components/common/tabbar/TabBar";
+import TabItem from "components/common/tabbar/TabItem";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    HelloWorld
-  }
-}
+    TabBar,
+    TabItem,
+  },
+};
 </script>
-
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+@import url("assets/css/base.css");
 </style>
