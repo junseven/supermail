@@ -14,10 +14,31 @@ export default {
       scroll: null,
     };
   },
+  props:{
+    probeType:{
+      type:Number,
+      default:0,
+    },
+    pullUpLoad:{
+      type:Boolean,
+      default:false
+    }
+  },
   mounted() {
     this.scroll = new BScroll(this.$refs.wrapper, {
       observeDOM: true,
+      click:true,
+      probeType:this.probeType,
+      pullUpLoad:this.pullUpLoad,
     });
+    this.scroll.on('scroll', (position) => {
+      //console.log(position.x, position.y)
+      this.$emit("scroll",position)
+    })
+    this.scroll.on('pullingUp', (position) => {
+      //console.log(position.x, position.y)
+      this.$emit("pullingUp")
+    })
   },
   components: {},
 };
