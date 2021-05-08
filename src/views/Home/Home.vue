@@ -76,26 +76,34 @@ export default {
   methods: {
     tabClick(index) {
       this.currentType = Object.keys(this.goods)[index];
+      this.$refs.scroll.refresh();  
     },
-
+    
+    //异步获取数据
     getHomeGoods(type) {
-      this.goods[type].page +=1,
-      getHomeGoods(type, this.goods[type].page).then((res) => {
+      
+      getHomeGoods(type, this.goods[type].page+1).then((res) => {
         //console.log(res);
-        this.goods[type].list = res.list;
+        this.goods[type].list.push(...res.list);
+        this.goods[type].page +=1,
+        //console.log(this.$refs.scroll);
+        this.$refs.scroll.finishPullUp();
+      }).catch((err)=>{
+        this.$refs.scroll.finishPullUp();
       });
     },
 
+    //scroll操作
     backClick() {
-      console.log(this.$refs.scroll.scroll);
+      
       this.$refs.scroll.scroll.scrollTo(0, 0, 500);
     },
     contentScroll(position) {
       this.isShowBackTop = position.y < -1000;
     },
     loadMore(){
-       this.getHomeGoods(this.currentType)
-      
+      this.getHomeGoods(this.currentType)
+      this.$refs.scroll.refresh()  
     },
   },
 };

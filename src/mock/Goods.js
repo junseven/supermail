@@ -3,6 +3,7 @@ let goodList = {
   pop: {
     1:{
       'list|10': [{
+      'id|+1':10000,
       name: '@name',
       title: '@title(3)',
       price: '@float(0,2000,2,2)',
@@ -11,6 +12,7 @@ let goodList = {
     },
     2: {
       'list|10': [{
+        'id|+1': 10000,
         name: '@name',
         title: '@title(3)',
         price: '@float(0,2000,2,2)',
@@ -19,6 +21,7 @@ let goodList = {
     },
     3: {
       'list|10': [{
+        'id|+1': 10000,
         name: '@name',
         title: '@title(3)',
         price: '@float(0,2000,2,2)',
@@ -58,6 +61,14 @@ let goodList = {
       img: '@dataImage(250x250,精选)'
     }]},
     2: {
+      'list|10': [{
+        name: '@name',
+        title: '@title(3)',
+        price: '@float(0,2000,2,2)',
+        img: '@dataImage(250x250,精选)'
+      }]
+    },
+     3: {
       'list|10': [{
         name: '@name',
         title: '@title(3)',
