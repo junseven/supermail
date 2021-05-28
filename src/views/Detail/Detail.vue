@@ -1,9 +1,11 @@
 <template>
   <div>
-
+    <detail-nav></detail-nav>
   </div> 
 </template>
 <script >
+import DetailNav from './childDetail/DetailNav.vue';
+  
   export default {
     name: '', 
     data()  {
@@ -17,6 +19,7 @@
       console.log(this.$route);
     },
     components: {
+        DetailNav
 
     }
   }
