@@ -2,7 +2,7 @@
   <div>
     <nav-bar>
       <template v-slot:left>
-        <img src="~assets/img/common/back.svg" style="margin-top:10px">
+        <img src="~assets/img/common/back.svg" style="margin-top:10px" @click="back()">
       </template>
       <template v-slot:middle >
         <div class="title">
@@ -29,6 +29,11 @@ import NavBar from 'components/common/navbar/NavBar.vue';
     },
     components: {
       NavBar,
+    },
+    methods:{
+      back(){
+        this.$router.back();
+      }
     }
   }
 </script>
