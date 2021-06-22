@@ -10,7 +10,7 @@ export function getHomeGoods(type, page) {
   return request({
     url: '/home/data',
     //method:'get',
-    data: {
+    params: {
       type,
       page
     },

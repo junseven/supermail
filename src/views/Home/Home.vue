@@ -25,6 +25,7 @@
 </template>
 <script >
 import { getHomeMultidata, getHomeGoods } from "network/home";
+import { getDetail, Goods } from "network/home";
 
 import HomeSwiper from "./childComps/HomeSwiper"; //轮播图模块
 import recommend from "./childComps/recommend";
@@ -67,7 +68,7 @@ export default {
       this.banners = res.banner.list;
       this.recommends = res.recommend.list;
     });
-
+    
     //获取商品数据
     this.getHomeGoods("pop");
     this.getHomeGoods("new");
@@ -95,7 +96,6 @@ export default {
 
     //scroll操作
     backClick() {
-      
       this.$refs.scroll.scroll.scrollTo(0, 0, 500);
     },
     contentScroll(position) {

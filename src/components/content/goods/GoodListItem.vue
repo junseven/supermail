@@ -1,6 +1,6 @@
 <template>
   <div class="goods-item" @click="todetail">
-    <img :src="listItem.img" alt="" />
+    <img :src="listItem.show.img" alt="" />
     <div class="goods-info">
       <p>{{ listItem.title }}</p>
       <span class="price">{{ listItem.price }}</span>
@@ -21,7 +21,7 @@ export default {
   },
   methods:{
     todetail(){
-      this.$router.push('/detail/'+ this.listItem.id)
+      this.$router.push('/detail/'+ this.listItem.shopId)
       
     }
   },
