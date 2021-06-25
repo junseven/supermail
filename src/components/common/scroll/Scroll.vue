@@ -35,7 +35,7 @@ export default {
       //console.log(position.x, position.y)
       this.$emit("scroll",position)
     })
-    this.scroll.on('pullingUp', (position) => {
+    this.pullUpLoad&&this.scroll.on('pullingUp', (position) => {
       //console.log(position.x, position.y)
       this.$emit("pullingUp")
     })

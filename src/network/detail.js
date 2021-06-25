@@ -1,15 +1,15 @@
 import {request} from './request'
-export function getDetail(){
+export function getDetail(iid){
   return request({
-    url:'/detail',
+    url:'/detail/',
     params:{
-      lid
+      iid
     }
   })
 }
 
 export class Goods{
-  constructor(itemInfo,columns,servics){
+  constructor(itemInfo,columns,services){
     this.title = itemInfo.title
     this.desc = itemInfo.desc
     this.newPrice = itemInfo.price
@@ -23,11 +23,19 @@ export class Goods{
 
 export class Shop{
   constructor(shopInfo){
-    this.logo = showInfo.shopLogo;
-    this.name = showInfo.name;
-    this.fans = showInfo.sFans;
-    this.sells = showInfo.sSells;
-    this.score = showInfo.score;
-    this.goodsCount = showInfo.cGoods;
+    this.logo = shopInfo.shopLogo;
+    this.name = shopInfo.name;
+    this.fans = shopInfo.sFans;
+    this.sells = shopInfo.sSells;
+    this.score = shopInfo.score;
+    this.goodsCount = shopInfo.cGoods;
+  }
+}
+
+export class GoodsParams{
+  constructor(info,rule){
+    this.image = info.images||'';
+    this.infos = info.set;
+    this.sizes = rule.tables;
   }
 }

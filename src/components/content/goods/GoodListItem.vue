@@ -21,7 +21,7 @@ export default {
   },
   methods:{
     todetail(){
-      this.$router.push('/detail/'+ this.listItem.shopId)
+      this.$router.push('/detail/'+ this.listItem.iid)
       
     }
   },
