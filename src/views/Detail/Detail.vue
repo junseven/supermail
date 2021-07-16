@@ -10,6 +10,7 @@
       <detail-shop-info :shop="shop"/>
       <detail-goods-info :detailInfo="detailInfo" @imgLoad="imgLoad"/>
       <detail-params-info  :paramsInfo="paramsInfo "/>
+      <detail-comment-info  :commentInfo="commentInfo"/>
     </scroll>  
     
   </div> 
@@ -21,9 +22,10 @@ import DetailBaseInfo from './childDetail/DetailBaseInfo';//商品信息组件
 import DetailShopInfo from './childDetail/DetailShopInfo';//商铺组件
 import DetailGoodsInfo from './childDetail/DetailGoodsInfo';//详细信息组件
 import DetailParamsInfo from './childDetail/DetailParamsInfo';//配置信息组件
+import DetailCommentInfo from './childDetail/DetailCommentInfo';//评论信息组件
 
 import Scroll from 'components/common/scroll/Scroll'
-import { getDetail, Goods,Shop,GoodsParams } from 'network/detail';
+import { getDetail,getRecommend, Goods,Shop,GoodsParams } from 'network/detail';
   export default {
     name: 'detail', 
     data()  {
@@ -34,8 +36,8 @@ import { getDetail, Goods,Shop,GoodsParams } from 'network/detail';
         shop:{},
         detailInfo:{},
         paramsInfo:{},
-        recommends:[],
         commentInfo:{},
+        recommends:[],
       }
     },
     created(){
@@ -64,7 +66,12 @@ import { getDetail, Goods,Shop,GoodsParams } from 'network/detail';
 
         //6.获取评论信息
         this.commentInfo = data.rate.cRate !==0?data.rate.list[0]:{}
+        
       })
+      getRecommend().then((res)=>{
+        this.recommends =res.data.list
+      })
+
     },
     methods:{
       imgLoad(){
@@ -79,6 +86,7 @@ import { getDetail, Goods,Shop,GoodsParams } from 'network/detail';
       Scroll,
       DetailGoodsInfo,
       DetailParamsInfo,
+      DetailCommentInfo,
     }
   }
 </script>
