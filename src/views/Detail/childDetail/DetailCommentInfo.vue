@@ -1,4 +1,5 @@
 <template>
+
     <div v-if="commentInfo !== null && commentInfo.images !== undefined"
     class="comment">
             <div class="info-header">
@@ -25,6 +26,7 @@
                 </div>
             </div>
     </div>
+
 </template>
 <script>
 import {formatDate} from 'common/utils'

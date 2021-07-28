@@ -20,7 +20,7 @@
 
 <script>
 	export default {
-	name: "DetailparamsInfo",
+	name: "DetailParamsInfo",
     props: {
       paramsInfo: {
         type: Object,

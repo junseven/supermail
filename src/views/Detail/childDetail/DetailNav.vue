@@ -9,7 +9,7 @@
           <div v-for="(item,index) in titles" 
                :key="index" 
                :class="currentActive==index?'active':''" 
-               @click="currentActive=index"
+               @click="setCurrent(index)"
                class="title-item">{{item}}</div>
         </div>
       </template>
@@ -20,10 +20,10 @@
 
 import NavBar from 'components/common/navbar/NavBar.vue';
   export default {
-    name: '', 
+    name: 'navbar', 
     data()  {
       return{
-        titles:['商品','评论','参数','推荐'],
+        titles:['商品','参数','评论','推荐'],
         currentActive:0,
       }
     },
@@ -33,6 +33,10 @@ import NavBar from 'components/common/navbar/NavBar.vue';
     methods:{
       back(){
         this.$router.back();
+      },
+      setCurrent(index){
+        this.currentActive = index;
+        this.$emit('clickNav',index);
       }
     }
   }

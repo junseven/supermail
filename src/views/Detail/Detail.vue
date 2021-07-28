@@ -1,16 +1,18 @@
 <template>
   <div id="detail">
-    <detail-nav class="detail-nav"></detail-nav>
+    <detail-nav ref="nav" class="detail-nav" @clickNav="scrollto"></detail-nav>
     <scroll
       ref="scroll"
       :probeType="3"
-      class="content">
+      class="content"
+      @scroll="contentScroll">
       <detail-swiper :topImages="topImages"/>
       <detail-base-info :goods="goods"/>
       <detail-shop-info :shop="shop"/>
       <detail-goods-info :detailInfo="detailInfo" @imgLoad="imgLoad"/>
-      <detail-params-info  :paramsInfo="paramsInfo "/>
-      <detail-comment-info  :commentInfo="commentInfo"/>
+      <detail-params-info ref="params" :paramsInfo="paramsInfo "/>
+      <detail-comment-info ref="comment" :commentInfo="commentInfo"/>
+      <goods-list ref="goods" :goodsList="this.recommends"></goods-list>
     </scroll>  
     
   </div> 
@@ -23,6 +25,7 @@ import DetailShopInfo from './childDetail/DetailShopInfo';//商铺组件
 import DetailGoodsInfo from './childDetail/DetailGoodsInfo';//详细信息组件
 import DetailParamsInfo from './childDetail/DetailParamsInfo';//配置信息组件
 import DetailCommentInfo from './childDetail/DetailCommentInfo';//评论信息组件
+import GoodsList from "components/content/goods/GoodsList";
 
 import Scroll from 'components/common/scroll/Scroll'
 import { getDetail,getRecommend, Goods,Shop,GoodsParams } from 'network/detail';
@@ -38,6 +41,8 @@ import { getDetail,getRecommend, Goods,Shop,GoodsParams } from 'network/detail';
         paramsInfo:{},
         commentInfo:{},
         recommends:[],
+        navarr:['scroll','params','comment','goods'],
+        currentIndex:0,
       }
     },
     created(){
@@ -46,7 +51,7 @@ import { getDetail,getRecommend, Goods,Shop,GoodsParams } from 'network/detail';
       // console.log(this.iid);
       //根据id获取商品数据
       getDetail(this.iid).then((res)=>{
-        console.log(res);
+        //console.log(res);
         const data = res.result
 
         //1.获得顶部轮播图数据
@@ -67,16 +72,34 @@ import { getDetail,getRecommend, Goods,Shop,GoodsParams } from 'network/detail';
         //6.获取评论信息
         this.commentInfo = data.rate.cRate !==0?data.rate.list[0]:{}
         
-      })
+      }),
+      
       getRecommend().then((res)=>{
         this.recommends =res.data.list
+        //console.log(this.recommends);
       })
 
     },
     methods:{
       imgLoad(){
         this.$refs.scroll.refresh();
+        
+      },
+      scrollto(value){
+        //console.log(this.$refs[this.navarr[value]].$el.offsetTop);
+        this.$refs.scroll.scroll.scrollTo(0,-this.$refs[this.navarr[value]].$el.offsetTop,100)
+      },
+      contentScroll(position){
+        for(const index in this.navarr){
+          if(this.currentIndex != index && ((+index<3&&-position.y>=this.$refs[this.navarr[index]].$el.offsetTop&&-position.y<this.$refs[this.navarr[+index+1]].$el.offsetTop)||(+index==3&&-position.y>=this.$refs[this.navarr[index]].$el.offsetTop)))
+          {
+            this.currentIndex = index;
+            this.$refs.nav.currentActive = index;
+            console.log(this.currentIndex);
+          }
+        }
       }
+
     },
     components: {
       DetailNav,
@@ -87,6 +110,7 @@ import { getDetail,getRecommend, Goods,Shop,GoodsParams } from 'network/detail';
       DetailGoodsInfo,
       DetailParamsInfo,
       DetailCommentInfo,
+      GoodsList,
     }
   }
 </script>
