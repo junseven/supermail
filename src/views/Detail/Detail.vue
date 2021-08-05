@@ -1,5 +1,6 @@
 <template>
   <div id="detail">
+    {{$store.state.cartList.length}}
     <detail-nav ref="nav" class="detail-nav" @clickNav="scrollto"></detail-nav>
     <scroll
       ref="scroll"
@@ -13,8 +14,10 @@
       <detail-params-info ref="params" :paramsInfo="paramsInfo "/>
       <detail-comment-info ref="comment" :commentInfo="commentInfo"/>
       <goods-list ref="goods" :goodsList="this.recommends"></goods-list>
+      
     </scroll>  
-    
+    <back-top v-show="showTop" @click.native="backTop"></back-top>
+    <detail-bottom-bar @addCart="addToCart"></detail-bottom-bar>
   </div> 
 </template>
 <script >
@@ -26,7 +29,9 @@ import DetailGoodsInfo from './childDetail/DetailGoodsInfo';//详细信息组件
 import DetailParamsInfo from './childDetail/DetailParamsInfo';//配置信息组件
 import DetailCommentInfo from './childDetail/DetailCommentInfo';//评论信息组件
 import GoodsList from "components/content/goods/GoodsList";
+import DetailBottomBar from './childDetail/DetailBottomBar';//评论信息组件
 
+import backTop from  'components/content/backTop/BackTop';
 import Scroll from 'components/common/scroll/Scroll'
 import { getDetail,getRecommend, Goods,Shop,GoodsParams } from 'network/detail';
   export default {
@@ -43,6 +48,7 @@ import { getDetail,getRecommend, Goods,Shop,GoodsParams } from 'network/detail';
         recommends:[],
         navarr:['scroll','params','comment','goods'],
         currentIndex:0,
+        showTop:false,
       }
     },
     created(){
@@ -85,21 +91,42 @@ import { getDetail,getRecommend, Goods,Shop,GoodsParams } from 'network/detail';
         this.$refs.scroll.refresh();
         
       },
+
+      //头部导航跳转
       scrollto(value){
         //console.log(this.$refs[this.navarr[value]].$el.offsetTop);
         this.$refs.scroll.scroll.scrollTo(0,-this.$refs[this.navarr[value]].$el.offsetTop,100)
       },
+
+      //滚动获取位置
       contentScroll(position){
+        const positionY = -position.y;
         for(const index in this.navarr){
           if(this.currentIndex != index && ((+index<3&&-position.y>=this.$refs[this.navarr[index]].$el.offsetTop&&-position.y<this.$refs[this.navarr[+index+1]].$el.offsetTop)||(+index==3&&-position.y>=this.$refs[this.navarr[index]].$el.offsetTop)))
           {
             this.currentIndex = index;
             this.$refs.nav.currentActive = index;
-            console.log(this.currentIndex);
+            //console.log(this.currentIndex);
           }
         }
-      }
 
+        // 是否显示回到底部按钮的判断
+        this.showTop = positionY>1000
+      },
+      backTop(){
+        this.$refs.scroll.scroll.scrollTo(0,0)
+      },
+      addToCart(){
+        console.log('add')
+        const product = {}
+        product.image = this.topImages[0]
+        product.title = this.goods.title
+        product.desc = this.goods.desc
+        product.price = this.goods.realPrice
+        product.iid = this.iid 
+        this.$store.dispatch('addCart',product)
+      }
+      
     },
     components: {
       DetailNav,
@@ -111,6 +138,8 @@ import { getDetail,getRecommend, Goods,Shop,GoodsParams } from 'network/detail';
       DetailParamsInfo,
       DetailCommentInfo,
       GoodsList,
+      DetailBottomBar,
+      backTop,
     }
   }
 </script>
@@ -124,7 +153,7 @@ import { getDetail,getRecommend, Goods,Shop,GoodsParams } from 'network/detail';
   }
 
   .content{
-    height: calc(100% - 44px);
+    height: calc(100% - 44px - 44px);
     overflow: hidden;
   }
 </style>

@@ -1,32 +1,36 @@
 <template>
-
+  <div>
     <div v-if="commentInfo !== null && commentInfo.images !== undefined"
     class="comment">
-            <div class="info-header">
-                <div class="header-title">用户评价</div>
-                <div class="header-more">更多
-                <i class="arrow-right"></i>
-                </div>
-            </div>
-            <div class="info-user">
-                <img :src="commentInfo.user.avatar" alt="">
-                <span>{{commentInfo.user.uname}}</span>
-            </div>
-            <div class="info-detail">
-                <p>{{commentInfo.content}}</p>
-                <div class="info-other">
-                    <!-- <span class="data">{{date}}</span> -->
-                    <!-- 过滤器语法 | 前面的内容即下面的过滤器函数中的value值-->
-                    <span class="data">{{commentInfo.created | showDate}}</span>
-                    <span>{{commentInfo.style}}</span>
-                </div>
-                <div class="info-imgs">
-                    <img v-for="(item,index) in commentInfo.images" 
-                    :key="index" :src="item" alt="">
-                </div>
-            </div>
-    </div>
+      <div class="info-header">
+          <div class="header-title">用户评价</div>
+          <div class="header-more">更多
+          <i class="arrow-right"></i>
+          </div>
+      </div>
+      <div class="info-user">
+        <img :src="commentInfo.user.avatar" alt="">
+        <span>{{commentInfo.user.uname}}</span>
+      </div>
+      <div class="info-detail">
+          <p>{{commentInfo.content}}</p>
+          <div class="info-other">
+              <!-- <span class="data">{{date}}</span> -->
+              <!-- 过滤器语法 | 前面的内容即下面的过滤器函数中的value值-->
+              <span class="data">{{commentInfo.created | showDate}}</span>
+              <span>{{commentInfo.style}}</span>
+          </div>
+          <div class="info-imgs">
+              <img v-for="(item,index) in commentInfo.images" 
+              :key="index" :src="item" alt="">
+          </div>
+      </div>
 
+    </div>
+    <div v-else>
+        暂无评价
+      </div>
+  </div>
 </template>
 <script>
 import {formatDate} from 'common/utils'
