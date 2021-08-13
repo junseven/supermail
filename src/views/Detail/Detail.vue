@@ -1,6 +1,5 @@
 <template>
   <div id="detail">
-    {{$store.state.cartList.length}}
     <detail-nav ref="nav" class="detail-nav" @clickNav="scrollto"></detail-nav>
     <scroll
       ref="scroll"

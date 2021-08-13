@@ -2,13 +2,16 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from "./router/index";
 import store from "./store/index"
+import vuetify from './plugins/vuetify'
+import axios from 'axios'
 // require('./mock');
-
+Vue.prototype.$axios = axios
 Vue.config.productionTip = false
 
 new Vue({
   render: function (h) { return h(App) },
   router,
+  vuetify,
   store
 }).$mount('#app')
 
