@@ -1,11 +1,11 @@
 import Vue from "vue";
 import VueRouter from 'vue-router'
-
+import store from '../store/index'
 Vue.use(VueRouter)
 const routes=[
   {
     path:'',
-    redirect:'/home',
+    redirect:'/login',
   },
   {
     path:'/index',
@@ -50,4 +50,7 @@ const router = new VueRouter({
   routes,
   mode : 'history',
 })
+
+
+
 export default router

@@ -4,7 +4,8 @@ Vue.use(Vuex)
 const store = new Vuex.Store({
   state:{
     cartList:[],
-    user:[]
+    user:[],
+    token:'',
   },
   mutations:{
     add_to_cart(state,payload){
@@ -15,6 +16,9 @@ const store = new Vuex.Store({
     add_count(state, payload){
       payload.count++
     },
+    setToken(state,paload){
+      state.token = paload
+    }
 
     
 

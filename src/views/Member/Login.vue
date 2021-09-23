@@ -9,9 +9,9 @@
       <v-text-field
         name="account"
         label="账号"
-        v-model="name"
+        v-model="account"
         prepend-icon="mdi-account-supervisor"
-        :rules="nameRules"
+        :rules="accountRules"
         required
       ></v-text-field>
 
@@ -51,8 +51,8 @@
     data: () => ({
       show1:false,
       valid: true,
-      name: '',
-      nameRules: [
+      account: '',
+      accountRules: [
         v => !!v || '请输入账号',
         v => (v && v.length <= 10) || 'Name must be less than 10 characters',
       ],
@@ -61,11 +61,27 @@
         v => !!v || '请输入密码',
       ],
     }),
-
+    computed:{
+       model(){
+         return {
+        username:this.account,
+        password:this.password}
+      }
+    },
     methods: {
       login () {
-        this.$refs.form.validate()
-
+        if(this.$refs.form.validate()){
+          this.$axios.get('/api/login',{params: this.model}).then(res=>{
+            const result = res.data
+            if(result.code==0){
+              this.$store.commit('setToken',result.token)
+              window.localStorage.setItem('token',result.token)
+              alert(result.message)
+            }else{
+              alert(result.message)
+            }
+          })
+        }
       },
       reset () {
         this.$router.push('/register')
