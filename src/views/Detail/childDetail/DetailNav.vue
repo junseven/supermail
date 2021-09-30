@@ -32,7 +32,7 @@ import NavBar from 'components/common/navbar/NavBar.vue';
     },
     methods:{
       back(){
-        this.$router.back();
+        this.$router.push('/home');
       },
       setCurrent(index){
         this.currentActive = index;
