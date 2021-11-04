@@ -1,9 +1,7 @@
 <template>
   <div id="app">
-    <keep-alive exclude="Detail">
-      <router-view :key="$route.fullPath" />
-    </keep-alive>
-    <main-tabbar/>
+    <router-view  />
+    <!-- <main-tabbar/> -->
   </div>
 </template>
 
@@ -13,7 +11,7 @@ import MainTabbar from './components/content/mainTabBar/MainTabBar.vue'
 export default {
   name: 'App',
   components: {
-    MainTabbar
+    
   }
 }
 </script>

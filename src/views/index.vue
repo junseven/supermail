@@ -1,7 +1,7 @@
 <template>
   <div id="index">
-    <keep-alive exclude="detail">
-     <router-view></router-view>
+    <keep-alive include="Home">
+     <router-view ></router-view>
     </keep-alive>
     <main-tabbar></main-tabbar>
   </div>

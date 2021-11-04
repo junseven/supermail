@@ -12,8 +12,12 @@ const routes=[
     component:()=>import ('views/index.vue'),
     children:[
       {
-        path:'/home',
-        component:()=>import ('views/Home/Home.vue')
+        path: '/home',
+        component: ()=>import ('views/Home/Home.vue'),
+        meta: {
+          isUseCache:false,
+          keepAlive:true,
+        }
       },
       {
         path:'/category',
@@ -49,6 +53,19 @@ const routes=[
 const router = new VueRouter({
   routes,
   mode : 'history',
+  // scrollBehavior(to, from, savedPosition) {
+  //   if (savedPosition) {
+  //     console.log(savedPosition)
+  //     return savedPosition
+  //   } else {
+  //     if (from.meta.keepAlive) {
+  //       console.log(document.body.scrollTop)
+  //       from.meta.savedPosition = document.body.scrollTop;
+  //     }
+  //     return { x: 0, y: to.meta.savedPosition || 0 }
+  //   }
+  // }
+
 })
 
 

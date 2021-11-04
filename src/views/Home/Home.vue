@@ -50,6 +50,7 @@ export default {
       },
       currentType: "pop",
       isShowBackTop: false,
+      scrollY,
     };
   },
   components: {
@@ -105,6 +106,14 @@ export default {
       this.getHomeGoods(this.currentType)
       this.$refs.scroll.refresh()  
     },
+  },
+  activated(){
+    console.log(this.scrollY)
+    //this.$refs.scroll.scroll.scrollTo(0, this.scrollY, 1000);//滚动到首页离开时的位置
+    this.$refs.scroll.refresh() 
+  },  
+  deactivated() {
+    this.scrollY = this.$refs.scroll.scroll.y//获取离开前的滚动位置
   },
 };
 </script>

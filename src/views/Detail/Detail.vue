@@ -27,14 +27,14 @@ import DetailShopInfo from './childDetail/DetailShopInfo';//商铺组件
 import DetailGoodsInfo from './childDetail/DetailGoodsInfo';//详细信息组件
 import DetailParamsInfo from './childDetail/DetailParamsInfo';//配置信息组件
 import DetailCommentInfo from './childDetail/DetailCommentInfo';//评论信息组件
-import GoodsList from "components/content/goods/GoodsList";
-import DetailBottomBar from './childDetail/DetailBottomBar';//评论信息组件
+import GoodsList from "components/content/goods/GoodsList";   
+import DetailBottomBar from './childDetail/DetailBottomBar';//
 
 import backTop from  'components/content/backTop/BackTop';
 import Scroll from 'components/common/scroll/Scroll'
 import { getDetail,getRecommend, Goods,Shop,GoodsParams } from 'network/detail';
   export default {
-    name: 'detail', 
+    name: 'Detail', 
     data()  {
       return{
         iid:null,
