@@ -11,7 +11,7 @@
             @scroll="contentScroll"
             :pullUpLoad="true"
             @pullingUp="loadMore()">
-      <home-swiper :banners="banners"></home-swiper>
+      <home-swiper :banners="banners" @imageload="swiperImageload"></home-swiper>
       <recommend :recommends="recommends"></recommend>
       <feature-view></feature-view>
       <tab-control
@@ -81,6 +81,11 @@ export default {
       this.$refs.scroll.refresh();  
     },
     
+    swiperImageload(){
+      this.$refs.scroll.refresh();  
+      this.$refs.scroll.scroll.scrollTo(0, this.scrollY, 1000);
+    },
+
     //异步获取数据
     getHomeGoods(type) {
       
@@ -108,13 +113,15 @@ export default {
     },
   },
   activated(){
-    console.log(this.scrollY)
+    //console.log(this.scrollY)
     //this.$refs.scroll.scroll.scrollTo(0, this.scrollY, 1000);//滚动到首页离开时的位置
+    this.$refs.scroll.scroll.scrollTo(0, this.scrollY, 0);
     this.$refs.scroll.refresh() 
   },  
   deactivated() {
     this.scrollY = this.$refs.scroll.scroll.y//获取离开前的滚动位置
   },
+
 };
 </script>
 

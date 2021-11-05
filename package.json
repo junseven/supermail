@@ -9,19 +9,17 @@
   "dependencies": {
     "axios": "^0.21.1",
     "better-scroll": "^2.2.1",
-    "mockjs": "^1.1.0",
     "router": "^1.3.5",
     "vue": "^2.6.11",
+    "vue-lazyload": "^1.3.3",
     "vue-router": "^3.2.0",
-    "vuetify": "^2.4.0",
+    "fastclick": "^1.0.6",
     "vuex": "^3.6.2"
   },
   "devDependencies": {
     "@vue/cli-service": "~4.5.0",
     "sass": "~1.32.0",
     "sass-loader": "^10.0.0",
-    "vue-cli-plugein-vuetify": "~2.4.2",
-    "vue-template-compiler": "^2.6.11",
-    "vuetify-loader": "^1.7.0"
+    "vue-template-compiler": "^2.6.11"
   }
 }

@@ -2,16 +2,25 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from "./router/index";
 import store from "./store/index"
-import vuetify from './plugins/vuetify'
 import axios from 'axios'
+
+import FastClick from 'fastclick'
+import VueLazyLoad from 'vue-lazyload'
+
 // require('./mock');
 Vue.prototype.$axios = axios
+Vue.prototype.$bus = new Vue()
 Vue.config.productionTip = false
 
+//安装插件
+Vue.use(VueLazyLoad, {
+  loading: require('./assets/img/common/placeholder.png')
+})
+
+FastClick.attach(document.body)
 new Vue({
   render: function (h) { return h(App) },
   router,
-  vuetify,
   store
 }).$mount('#app')
 
